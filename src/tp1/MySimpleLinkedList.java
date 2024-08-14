@@ -6,22 +6,36 @@ public class MySimpleLinkedList<T> {
 	
 	public MySimpleLinkedList() {
 		this.first = null;
+		this._size = 0;
 	}
-	
+
+	@Override
+	/**
+	 * O(1) porque solo necesita acceder al primer elemento.
+	 */
 	public void insertFront(T info) {
 		Node<T> tmp = new Node<T>(info,null);
 		tmp.setNext(this.first);
 		this.first = tmp;
 	}
 	
+	@Override
+	/**
+	 * O(1) porque solo necesita acceder al primer elemento.
+	 */
 	public T extractFront() {		
-		// TODO
-		return null;
+		Node<T> tmp = this.first;
+		this.first = tmp.getNext();
+		this._size--;
+		return tmp.getInfo();
 	}
 
+	@Override
+	/**
+	 * O(1) porque solo necesita acceder al primer elemento.
+	 */
 	public boolean isEmpty() {
-		// TODO
-		return false;
+		return this.first == null ;
 	}
 	
 	public T get(int index) {
@@ -30,8 +44,7 @@ public class MySimpleLinkedList<T> {
 	}
 	
 	public int size() {
-		// TODO
-		return 0;
+		return this._size;
 	}
 	
 	@Override
