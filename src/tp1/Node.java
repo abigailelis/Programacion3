@@ -1,5 +1,4 @@
-package ProgramacionIII.tp1;
-
+package tp1;
 public class Node<T> {
 
 	private T info;
@@ -29,6 +28,10 @@ public class Node<T> {
 
 	public void setInfo(T info) {
 		this.info = info;
+	}
+
+	public String toString() {
+		return this.info.toString();
 	}
 
 }
