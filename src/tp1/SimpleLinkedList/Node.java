@@ -1,4 +1,4 @@
-package tp1;
+package tp1.SimpleLinkedList;
 public class Node<T> {
 
 	private T info;
