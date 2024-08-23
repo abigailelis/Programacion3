@@ -12,7 +12,7 @@ public class MyDoubleLinkedList<T> {
 	}
 
 	/**
-	 * O(1) porque solo necesita acceder al primer elemento.
+	 * O(1) CONSTANTE: Porque solo necesita acceder al primer elemento.
 	 */
 	public void insertFront(T info) {
 		NodeDouble<T> tmp = new NodeDouble<T>(info,null, null);
@@ -23,20 +23,7 @@ public class MyDoubleLinkedList<T> {
 		this._size++;
 	}
 
-	public void insertInPos(T info, int index) {
-		NodeDouble<T> tmp = new NodeDouble<T>(info, null, null);
-        if(index == 0)
-            insertFront(info);
-        else if(index == size()-1)
-            insertLast(info);
-        else{
-		    tmp.setNext(this.getNode(index+1));
-            tmp.setPrev(this.getNode(index-1));
-            this.getNode(index-1).setNext(tmp);
-            this.getNode(index+1).setPrev(tmp);
-            this._size++;
-        }
-	}
+	
 
 	/**
 	 * O(1) porque solo necesita acceder al ultimo elemento.
@@ -70,7 +57,8 @@ public class MyDoubleLinkedList<T> {
 	}
 
 	/**
-	 * O(n) donde n es la cantidad de elementos de la lista.
+	 * O(n) LINEAL: Donde "n" es la cantidad de elementos de la lista.
+	 * Porque en el peor de los casos debe acceder a todos los elementos para econtrar el último.
 	 */
 	public int indexOf(T info){
 		int pos = -1;
@@ -86,7 +74,8 @@ public class MyDoubleLinkedList<T> {
 	}
 
 	/**
-	 *O(n) devuelve el elemento numero index ejemplo el 5to elemento.
+	 * O(n) LINEAL: Donde "n" es la cantidad de elementos de la lista.
+	 * Porque en el peor de los casos debe acceder a todos los elementos para encontrar el último.
 	 */
 	public T get(int index) {
 		if(index < 0 || index > this._size )
@@ -99,17 +88,11 @@ public class MyDoubleLinkedList<T> {
 		}
 	}
 
-	private NodeDouble<T> getNode(int index) {
-		if(index < 0 || index > this._size )
-		    return null;
-		else{
-			NodeDouble<T> aux = this.first;
-			for(int i = 0; i<index; i++)
-				aux = aux.getNext();
-			return aux;
-		}
-	}
+	
 
+    /**
+	 * O(1) CONSTANTE: Porque no accede a ningun elemento, solo al atributo _size de la clase.
+	 */
 	public int size() {
 		return this._size;
 	}
@@ -121,6 +104,10 @@ public class MyDoubleLinkedList<T> {
 		return this.first == null ;
 	}
 
+    /**
+	 * O(n) LINEAL: Donde "n" es la cantidad de elementos de la lista.
+	 * Porque debe acceder a todos los elementos.
+	 */
 	@Override
 	public String toString() {
 		String result = "";
@@ -132,5 +119,32 @@ public class MyDoubleLinkedList<T> {
             aux = aux.getNext();
         }
         return result;
+	}
+
+    //Preguntar si se puede hacer esto...
+    public void insertInPos(T info, int index) {
+		NodeDouble<T> tmp = new NodeDouble<T>(info, null, null);
+        if(index == 0)
+            insertFront(info);
+        else if(index == size()-1)
+            insertLast(info);
+        else{
+		    tmp.setNext(this.getNode(index+1));
+            tmp.setPrev(this.getNode(index-1));
+            this.getNode(index-1).setNext(tmp);
+            this.getNode(index+1).setPrev(tmp);
+            this._size++;
+        }
+	}
+
+    private NodeDouble<T> getNode(int index) {
+		if(index < 0 || index > this._size )
+		    return null;
+		else{
+			NodeDouble<T> aux = this.first;
+			for(int i = 0; i<index; i++)
+				aux = aux.getNext();
+			return aux;
+		}
 	}
 }

@@ -1,17 +1,15 @@
-package tp1.SimpleLinkedList;
-
-import java.util.Iterator;
+package tp1.DoubleLinkedList;
 
 public class Main{
 
     public static void main (String[] args){
-		MySimpleLinkedList<Integer> lista = new MySimpleLinkedList<Integer>();
+		MyDoubleLinkedList<Object> lista = new MyDoubleLinkedList<Object>();
         lista.insertFront(5);
         lista.insertFront(10);
         lista.insertFront(3);
         lista.insertFront(8);
 
-        MySimpleLinkedList<Integer> lista_d = new MySimpleLinkedList<Integer>();
+        MyDoubleLinkedList<Object> lista_d = new MyDoubleLinkedList<Object>();
         lista_d.insertFront(3);
         lista_d.insertFront(0);
         lista_d.insertFront(5);
@@ -28,18 +26,11 @@ public class Main{
 
         System.out.println("Ejercicio 6");
         System.out.println(diferenceBetweenLists(lista, lista_d));
-
-        Iterator<Integer> recorrido = lista.iterator();
-
-        while(recorrido.hasNext()){
-            int elem = recorrido.next();
-            System.out.println(elem);
-        }
 	}
 
     //Ejercicio 5
-    public static MySimpleLinkedList<Integer> compararListasDesordenadas(MySimpleLinkedList<Integer> lista1, MySimpleLinkedList<Integer> lista2){
-        MySimpleLinkedList<Integer> auxlist = new MySimpleLinkedList<Integer>();
+    public static MyDoubleLinkedList<Object> compararListasDesordenadas(MyDoubleLinkedList<Object> lista1, MyDoubleLinkedList<Object> lista2){
+        MyDoubleLinkedList<Object> auxlist = new MyDoubleLinkedList<Object>();
         
         for(int i=0; i<lista1.size(); i++){
             for(int j=0; j<lista2.size(); j++){
@@ -53,8 +44,8 @@ public class Main{
     }
 
     //Ejercicio 6
-    public static MySimpleLinkedList<Integer> diferenceBetweenLists(MySimpleLinkedList<Integer> lista1, MySimpleLinkedList<Integer> lista2){
-        MySimpleLinkedList<Integer> auxlist = new MySimpleLinkedList<Integer>();
+    public static MyDoubleLinkedList<Object> diferenceBetweenLists(MyDoubleLinkedList<Object> lista1, MyDoubleLinkedList<Object> lista2){
+        MyDoubleLinkedList<Object> auxlist = new MyDoubleLinkedList<Object>();
         for(int i=0; i<lista1.size(); i++){
             boolean exists = false;
             for(int j=0; j<lista2.size(); j++){
@@ -70,12 +61,12 @@ public class Main{
     }
 
 
-    public static MySimpleLinkedList<Integer> agregarOrdenado (MySimpleLinkedList<Integer> lista, Integer elem){
+
+    public static MyDoubleLinkedList<Object> agregarOrdenado (MyDoubleLinkedList<Object> lista, Object elem){
         for (int i = 0; i < lista.size(); i++){
             // if(prev > elem) Cómo comparo elementos de cualquier tipo ?
-        // lista.insertInPos(elem, i);
+                lista.insertInPos(elem, i);
         }
         return lista;
     }
-
 }

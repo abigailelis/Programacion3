@@ -1,9 +1,11 @@
 package tp1.SimpleLinkedList;
+import java.util.Iterator;
 
-public class MySimpleLinkedList<T> {
+public class MySimpleLinkedList<T> implements Iterable<T>{
 	
 	private Node<T> first;
 	private Node<T> ultimo;
+	
 	private int _size;
 	
 	public MySimpleLinkedList() {
@@ -13,7 +15,7 @@ public class MySimpleLinkedList<T> {
 	}
 	
 	/**
-	 * O(1) porque solo necesita acceder al primer elemento.
+	 * O(1) CONSTANTE: Porque solo necesita acceder al primer elemento.
 	 */
 	public void insertFront(T info) {
 		Node<T> tmp = new Node<T>(info,null);
@@ -24,24 +26,12 @@ public class MySimpleLinkedList<T> {
 		this._size++;
 	}
 
-	//reveer
-	public void insertInPos(T info, int index) {
-		Node<T> tmp = new Node<T>(info, null);
-        if(index == 0)
-            insertFront(info);
-        else{
-		    tmp.setNext(this.getNode(index+1));
-            this.getNode(index-1).setNext(tmp);
-            this._size++;
-        }
-	}
-
 	/**
-	 * O(1) porque solo necesita acceder al ultimo elemento.
+	 * O(1) CONSTANTE : Porque solo necesita acceder al último elemento.
 	 */
 	public void insertLast(T info){
 		if (this._size == 0)
-			insertFront(info);
+			insertFront(info); //O(1)
 		else{
 			ultimo.setNext(new Node<T>(info, null));
 			this._size++;
@@ -50,73 +40,71 @@ public class MySimpleLinkedList<T> {
 	}
 	
 	/**
-	 * O(1) porque solo necesita acceder al primer elemento.
+	 * O(1) CONSTANTE: Porque solo necesita acceder al primer elemento.
 	 */
 	public T extractFront() {
-		//Si está vacio retorna null
-		if(this.first == null)
+		if(this.first == null)  //Si está vacio retorna null y no realiza cambios
 			return null;
-		//Si tiene elementos crea una copia del 1ro, first ahora se vuelve el sig y decrementa el size
-		Node<T> tmp = this.first;
+		
+		Node<T> tmp = this.first;  //Si tiene elementos crea una copia del 1ro, first ahora se vuelve el sig y decrementa el size
 		this.first = tmp.getNext();
 		this._size--;
-		//Si tenia un solo elemento y lo borro reinicio el ultimo a null
-		if(this.first == null)
+		
+		if(this.first == null)  //Si tenia un solo elemento y lo borro reinicio el ultimo a null
 			this.ultimo = null;
+
 		return tmp.getInfo();
 	}
 
 	/**
-	 * O(n) donde n es la cantidad de elementos de la lista.
+	 * O(n) LINEAL: Donde "n" es la cantidad de elementos de la lista.
+	 * Porque en el peor de los casos debe acceder a todos los elementos para econtrar el último.
 	 */
 	public int indexOf(T info){
 		int pos = -1;
 		Node<T> cursor = this.first;
-		while (cursor!= null && !cursor.getInfo().equals(info)){
+		while (cursor!= null && !cursor.getInfo().equals(info)){ //O(n)
 			cursor = cursor.getNext();
 			pos++;
 		}
 		if (cursor == null)
 			return -1;
-		else 
-			return pos;
+		return pos;
 	}
 
 	/**
-	 *O(n) devuelve el elemento numero index ejemplo el 5to elemento.
+	 * O(n) LINEAL: Donde "n" es la cantidad de elementos de la lista.
+	 * Porque en el peor de los casos debe acceder a todos los elementos para encontrar el último.
 	 */
 	public T get(int index) {
 		if(index < 0 || index > this._size )
 			return null;
-		else{
-			Node<T> aux = this.first;
-			for(int i = 0; i<index; i++)
-				aux = aux.getNext();
-			return aux.getInfo();
-		}
+		Node<T> aux = this.first;
+		for(int i = 0; i < index; i++)  //O(n)
+			aux = aux.getNext();
+		return aux.getInfo(); //Devuelve info del elemento número "index": ejemplo el 5to elemento.
 	}
 
-	private Node<T> getNode(int index) {
-		if(index < 0 || index > this._size )
-			return null;
-		else{
-			Node<T> aux = this.first;
-			for(int i = 0; i<index; i++)
-				aux = aux.getNext();
-			return aux;
-		}
-	}
-
+	
+	/**
+	 * O(1) CONSTANTE: Porque no accede a ningun elemento, solo al atributo _size de la clase.
+	 */
 	public int size() {
 		return this._size;
 	}
 	
 	/**
-	 * O(1) porque solo necesita acceder al primer elemento.
+	 * O(1)
+	 * CONSTANTE: Porque no accede a ningun elemento, solo al atributo first de la clase.
 	 */
 	public boolean isEmpty() {
 		return this.first == null ;
 	}
+
+	/**
+	 * O(n) LINEAL: Donde "n" es la cantidad de elementos de la lista.
+	 * Porque debe acceder a todos los elementos.
+	 */
 	@Override
 	public String toString() {
 		String result = "";
@@ -129,5 +117,10 @@ public class MySimpleLinkedList<T> {
         }
         return result;
 	}
+
+	public Iterator<T> iterator(){
+		return new IterableMSLL<T>(first);
+	}
+	
 	
 }
