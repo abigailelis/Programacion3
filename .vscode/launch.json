@@ -8,6 +8,13 @@
             "type": "java",
             "name": "Main",
             "request": "launch",
+            "mainClass": "tp1.SimpleLinkedList.Main",
+            "projectName": "Programacion3_f2e2d7c8"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
             "mainClass": "tp1.DoubleLinkedList.Main",
             "projectName": "Programacion3_f2e2d7c8"
         },

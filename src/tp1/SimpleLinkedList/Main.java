@@ -1,33 +1,30 @@
 package tp1.SimpleLinkedList;
-
 import java.util.Iterator;
 
 public class Main{
 
     public static void main (String[] args){
 		MySimpleLinkedList<Integer> lista = new MySimpleLinkedList<Integer>();
+        MySimpleLinkedList<Integer> lista_d = new MySimpleLinkedList<Integer>();
+        
         lista.insertFront(5);
         lista.insertFront(10);
         lista.insertFront(3);
         lista.insertFront(8);
-
-        MySimpleLinkedList<Integer> lista_d = new MySimpleLinkedList<Integer>();
+        
         lista_d.insertFront(3);
         lista_d.insertFront(0);
         lista_d.insertFront(5);
         lista_d.insertFront(1);
 
-        //System.out.println(lista);
 
-        /** O(n*2) porque el metodo get(i) es O(n) * el for que tambien es O(n)
-        *   for (int i = 0; i < lista.size(); i++)
-        *       System.out.println(lista.get(i));
-        */
-        System.out.println("Ejercicio 5");
-        System.out.println(compararListasDesordenadas(lista, lista_d));
+        /* O(n*2) porque el metodo get(i) es O(n) * el for que tambien es O(n)*/
 
-        System.out.println("Ejercicio 6");
-        System.out.println(diferenceBetweenLists(lista, lista_d));
+        for (int i = 0; i < lista.size(); i++)
+            System.out.println(lista.get(i));
+        
+        
+        /* Ejemplo del iterator */
 
         Iterator<Integer> recorrido = lista.iterator();
 
@@ -35,47 +32,66 @@ public class Main{
             int elem = recorrido.next();
             System.out.println(elem);
         }
+
+        System.out.println("Ejercicio 5");
+        System.out.println(compararListasDesordenadas(lista, lista_d));
+        System.out.println("Ejercicio 6");
+        System.out.println(diferenceBetweenLists(lista, lista_d));
 	}
 
-    //Ejercicio 5
+    /* Ejercicio 5.A */
+
     public static MySimpleLinkedList<Integer> compararListasDesordenadas(MySimpleLinkedList<Integer> lista1, MySimpleLinkedList<Integer> lista2){
         MySimpleLinkedList<Integer> auxlist = new MySimpleLinkedList<Integer>();
         
         for(int i=0; i<lista1.size(); i++){
+            int elem = lista1.get(i);
             for(int j=0; j<lista2.size(); j++){
-                if(lista1.get(i).equals(lista2.get(j))){
-                    auxlist.insertLast(lista1.get(i));
-                    j = lista2.size();
-                }
+                if(elem == lista2.get(j))
+                    auxlist.insertLast(elem);
             }
         }
         return auxlist;
     }
 
-    //Ejercicio 6
+    /* Ejercicio 5.B */
+
+    public static MySimpleLinkedList<Integer> compararListasOrdenadas(MySimpleLinkedList<Integer> lista1, MySimpleLinkedList<Integer> lista2){
+        MySimpleLinkedList<Integer> auxlist = new MySimpleLinkedList<Integer>();
+        
+        IterableMSLL<Integer> iter1 = (IterableMSLL<Integer>)lista1.iterator();
+        IterableMSLL<Integer> iter2 = (IterableMSLL<Integer>)lista2.iterator();
+
+        while (iter1.hasNext() && iter2.hasNext()){
+            if(iter2.valor() < iter1.valor())
+                iter2.next();
+            if(iter1.valor() < iter2.valor())
+                iter1.next();
+            if(iter1.valor() == iter2.valor()){
+                auxlist.insertLast(iter1.valor());
+                iter1.next();
+                iter2.next();
+            }
+        }
+        return auxlist;
+    }
+
+
+    /* Ejercicio 6 QUEDA PARA MODIFICAR EN CLASE */
+
     public static MySimpleLinkedList<Integer> diferenceBetweenLists(MySimpleLinkedList<Integer> lista1, MySimpleLinkedList<Integer> lista2){
         MySimpleLinkedList<Integer> auxlist = new MySimpleLinkedList<Integer>();
+        
         for(int i=0; i<lista1.size(); i++){
             boolean exists = false;
             for(int j=0; j<lista2.size(); j++){
-                if(lista1.get(i).equals(lista2.get(j))){
+                if(lista1.get(i).equals(lista2.get(j)))
                     exists = true;
-                    j=lista2.size();
-                }
             }
             if(!exists)
                 auxlist.insertLast(lista1.get(i));
         }
         return auxlist;
-    }
-
-
-    public static MySimpleLinkedList<Integer> agregarOrdenado (MySimpleLinkedList<Integer> lista, Integer elem){
-        for (int i = 0; i < lista.size(); i++){
-            // if(prev > elem) Cómo comparo elementos de cualquier tipo ?
-        // lista.insertInPos(elem, i);
-        }
-        return lista;
     }
 
 }
