@@ -6,6 +6,41 @@
     "configurations": [
         {
             "type": "java",
+            "name": "IndexEqualElement",
+            "request": "launch",
+            "mainClass": "IndexEqualElement",
+            "projectName": "Programacion3_f2e2d7c8"
+        },
+        {
+            "type": "java",
+            "name": "Fibonacci",
+            "request": "launch",
+            "mainClass": "Fibonacci",
+            "projectName": "Programacion3_f2e2d7c8"
+        },
+        {
+            "type": "java",
+            "name": "DecimalToBinary",
+            "request": "launch",
+            "mainClass": "DecimalToBinary",
+            "projectName": "Programacion3_f2e2d7c8"
+        },
+        {
+            "type": "java",
+            "name": "QuickSort",
+            "request": "launch",
+            "mainClass": "QuickSort",
+            "projectName": "Programacion3_f2e2d7c8"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "Programacion3_f2e2d7c8"
+        },
+        {
+            "type": "java",
             "name": "Main",
             "request": "launch",
             "mainClass": "tp1.SimpleLinkedList.Main",
